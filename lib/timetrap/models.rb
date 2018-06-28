@@ -93,4 +93,34 @@ module Timetrap
       self[:value].to_s
     end
   end
+
+  class TaskEntry < Sequel::Model
+    # Entry into Task recording table.
+    plugin :schema
+
+    def active=(active)
+      self[:active] = active
+    end
+
+    def name=(name)
+      self[:name] = name
+    end
+
+    def active
+      self[:active]
+    end
+
+    def name
+      self[:name]
+    end
+
+    private
+
+    set_schema do
+      primary_key :id
+      column :active
+      column :name
+    end
+    create_table unles table_exists?
+  end
 end
